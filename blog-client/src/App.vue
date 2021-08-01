@@ -1,5 +1,3 @@
 <template>
-  <div>
-    Blog
-  </div>
+  <router-view />
 </template>
