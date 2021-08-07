@@ -1,7 +1,11 @@
 <template>
     <div>
-        <textarea v-model="post.title" class="w-full text-center text-4xl lg:text-6xl leading-10 font-bold
-        tracking-tight text-gray-900 border-none focus:ring-0 resize-none p-0"></textarea>
+        <ResizeTextarea v-if="post.title">
+            <template v-slot:default="{ resize, el }">
+                <textarea :ref="el" v-model="post.title" v-on:input="resize" class="w-full text-center text-4xl lg:text-6xl leading-10 font-bold
+                tracking-tight text-gray-900 border-none focus:ring-0 resize-none p-0"></textarea>
+            </template>
+        </ResizeTextarea>
     </div>
 </template>
 
@@ -9,8 +13,12 @@
 import useAdminPosts from '../../api/useAdminPosts';
 import { onMounted, watch } from 'vue';
 import _ from 'lodash';
+import ResizeTextarea from '../../components/ResizeTextarea.vue';
 
 export default {
+    components: {
+        ResizeTextarea
+    },
     props: {
         slug: {
             required: true,
