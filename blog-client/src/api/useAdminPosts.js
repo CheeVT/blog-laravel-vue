@@ -22,12 +22,20 @@ export default function useAdminPosts() {
         return response.data.data;
     }
 
+    const patchPost = async (slug) => {
+        let response = await axios.patch(`/api/admin/posts/${slug}`, post.value);
+
+        console.log('resp', response)
+        return response.data.data;
+    }
+
 
     return {
         posts,
         post,
         fetchPosts,
         fetchPost,
-        createPost
+        createPost,
+        patchPost
     }
 }
