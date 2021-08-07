@@ -30,5 +30,5 @@ Route::get('/posts/{post:slug}', PostShowController::class);
 
 Route::get('/admin/posts', AdminPostIndexController::class);
 Route::post('/admin/posts', AdminPostStoreController::class);
-Route::get('/admin/posts/{post:slug}/edit', AdminPostEditController::class);
-Route::patch('/admin/posts/{post:slug}', AdminPostUpdateController::class);
+Route::get('/admin/posts/{post:uuid}/edit', AdminPostEditController::class);
+Route::patch('/admin/posts/{post:uuid}', AdminPostUpdateController::class);

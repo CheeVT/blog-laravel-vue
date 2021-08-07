@@ -17,6 +17,7 @@ class PostUpdateController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
+            'slug' => 'required|string|unique:posts,slug,' . $post->id,
             'teaser' => 'nullable',
             'body' => 'nullable',
             'published' => 'boolean'
