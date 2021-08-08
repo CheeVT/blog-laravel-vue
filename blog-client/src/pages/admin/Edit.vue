@@ -24,6 +24,8 @@
                 </template>
             </ResizeTextarea>
         </div>
+
+        <Editor />
     </div>
 </template>
 
@@ -33,10 +35,12 @@ import { onMounted, watch, watchEffect } from 'vue';
 import _ from 'lodash';
 import slugify from 'slugify';
 import ResizeTextarea from '../../components/ResizeTextarea.vue';
+import Editor from '../../components/Editor.vue';
 
 export default {
     components: {
-        ResizeTextarea
+        ResizeTextarea,
+        Editor
     },
     props: {
         uuid: {
