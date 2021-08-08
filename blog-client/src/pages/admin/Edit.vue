@@ -25,7 +25,7 @@
             </ResizeTextarea>
         </div>
 
-        <Editor />
+        <Editor v-model="post.body" class="mt-16" />
     </div>
 </template>
 
