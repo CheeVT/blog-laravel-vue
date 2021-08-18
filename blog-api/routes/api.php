@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PostEditController as AdminPostEditController;
 use App\Http\Controllers\Admin\PostIndexController as AdminPostIndexController;
 use App\Http\Controllers\Admin\PostStoreController as AdminPostStoreController;
 use App\Http\Controllers\Admin\PostUpdateController as AdminPostUpdateController;
+use App\Http\Controllers\Admin\PostDestroyController as AdminPostDestroyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,4 @@ Route::get('/admin/posts', AdminPostIndexController::class);
 Route::post('/admin/posts', AdminPostStoreController::class);
 Route::get('/admin/posts/{post:uuid}/edit', AdminPostEditController::class);
 Route::patch('/admin/posts/{post:uuid}', AdminPostUpdateController::class);
+Route::delete('/admin/posts/{post:uuid}', AdminPostDestroyController::class);
