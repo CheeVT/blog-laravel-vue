@@ -8,7 +8,7 @@
 
             <div class="flex items-center space-x-6">
                 <div>
-                    <span class="text-sm text-gray-500">Autosaved</span>
+                    <span class="text-sm text-gray-500">{{ lastSaved.fromNow() }}</span>
                 </div>
                 <button v-on:click="post.published = !post.published" class="text-sm font-medium" v-bind:class="{ 'text-pink-500': !post.published }">
                     {{ !post.published ? 'Unpublished' : 'Published' }}
@@ -31,11 +31,14 @@
 
 <script>
 import useAdminPosts from '../../api/useAdminPosts';
-import { onMounted, watch, watchEffect } from 'vue';
+import { onMounted, watch, watchEffect, ref } from 'vue';
 import _ from 'lodash';
 import slugify from 'slugify';
 import ResizeTextarea from '../../components/ResizeTextarea.vue';
 import Editor from '../../components/Editor.vue';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 export default {
     components: {
@@ -51,8 +54,11 @@ export default {
     setup(props) {
         const { post, fetchPost, patchPost } = useAdminPosts();
 
+        const lastSaved = ref(dayjs())
+
         const updatePost = async () => {
             await patchPost(props.uuid);
+            lastSaved.value = dayjs();
         }
 
         const replaceSlug = () => {
@@ -79,7 +85,8 @@ export default {
         });
 
         return {
-            post
+            post,
+            lastSaved
         }
 
     }
