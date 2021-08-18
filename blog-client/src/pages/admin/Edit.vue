@@ -7,9 +7,11 @@
             </div>
 
             <div class="flex items-center space-x-6">
-                <div>
-                    <span class="text-sm text-gray-500">{{ lastSaved.fromNow() }}</span>
-                </div>
+                <RelativeTime :date="lastSaved" v-if="lastSaved">
+                    <template v-slot:default="{ fromNow }">                        
+                        <span class="text-sm text-gray-500">{{ fromNow }}</span>
+                    </template>
+                </RelativeTime>
                 <button v-on:click="post.published = !post.published" class="text-sm font-medium" v-bind:class="{ 'text-pink-500': !post.published }">
                     {{ !post.published ? 'Unpublished' : 'Published' }}
                 </button>
@@ -35,15 +37,16 @@ import { onMounted, watch, watchEffect, ref } from 'vue';
 import _ from 'lodash';
 import slugify from 'slugify';
 import ResizeTextarea from '../../components/ResizeTextarea.vue';
+import RelativeTime from '../../components/RelativeTime.vue';
 import Editor from '../../components/Editor.vue';
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-dayjs.extend(relativeTime);
+
 
 export default {
     components: {
         ResizeTextarea,
-        Editor
+        Editor,
+        RelativeTime
     },
     props: {
         uuid: {
@@ -54,7 +57,7 @@ export default {
     setup(props) {
         const { post, fetchPost, patchPost } = useAdminPosts();
 
-        const lastSaved = ref(dayjs())
+        const lastSaved = ref(null)
 
         const updatePost = async () => {
             await patchPost(props.uuid);
