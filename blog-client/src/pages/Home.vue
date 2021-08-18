@@ -5,7 +5,7 @@
                 <h1 class="text-3xl sm:text-4xl leading-10 font-bold">{{ post.title }}</h1>
             </router-link>
             <p class="mt-6 text-gray-500">
-                {{ post.teaser }}abc
+                {{ post.teaser }}
             </p>
         </div>
     </div>
